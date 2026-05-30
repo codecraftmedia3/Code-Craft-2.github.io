@@ -477,6 +477,29 @@ body::after{
 .submit-btn:hover{transform:translateY(-2px);box-shadow:0 16px 48px rgba(109,40,217,.5)}
 .submit-btn:active{transform:translateY(0)}
 
+.form-success{
+  display:none;
+  padding:2rem;
+  margin-top:1.5rem;
+  border-radius:20px;
+  background:rgba(34,211,238,.08);
+  border:1px solid rgba(34,211,238,.18);
+}
+.form-success h3{
+  font-family:'Orbitron',sans-serif;
+  font-size:1.5rem;
+  font-weight:800;
+  margin-bottom:1rem;
+}
+.form-success p{
+  color:rgba(255,255,255,.8);
+  line-height:1.75;
+  margin-bottom:1.5rem;
+}
+.form-success .btn{
+  width:auto;
+}
+
 /* ANIMATIONS */
 .fade-up{opacity:0;transform:translateY(28px);transition:opacity .6s ease,transform .6s ease}
 .fade-up.show{opacity:1;transform:translateY(0)}
@@ -824,15 +847,15 @@ body::after{
       </div>
       <div class="contact-form-wrap">
         <h2>Send a Message</h2>
-        <form onsubmit="return false" action="https://api.web3forms.com/submit" method="POST">
+        <form id="contact-form" action="https://api.web3forms.com/submit" method="POST">
           <input type="hidden" name="access_key" value="0f279afb-ee25-4613-9aae-65e3a5f3c415">
           <div class="form-row">
-            <div class="field"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
-            <div class="field"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
+            <div class="field"><label for="name">Full Name</label><input id="name" type="text" name="name" placeholder="Your full name" required></div>
+            <div class="field"><label for="email">Email Address</label><input id="email" type="email" name="email" placeholder="your@email.com" required></div>
           </div>
           <div class="field">
-            <label>Project Type</label>
-            <select>
+            <label for="project-type">Project Type</label>
+            <select id="project-type" name="project_type" required>
               <option value="">Select a project type</option>
               <option>Web-site Design</option>
               <option>3D Animation</option>
@@ -840,9 +863,14 @@ body::after{
               <option>Social Media Management</option>
             </select>
           </div>
-          <div class="field"><label>Message</label><textarea placeholder="Tell us about your project…"></textarea></div>
+          <div class="field"><label for="message">Message</label><textarea id="message" name="message" placeholder="Tell us about your project…" required></textarea></div>
           <button class="submit-btn" type="submit">Send Inquiry ✦</button>
         </form>
+        <div class="form-success" id="form-success" style="display:none;">
+          <h3>Your form has been submitted</h3>
+          <p>Thanks for reaching out! We’ve received your message and will be in touch shortly.</p>
+          <button class="btn btn-glow" type="button" id="new-message-btn">Send Another Message</button>
+        </div>
       </div>
     </div>
   </div>
@@ -914,6 +942,53 @@ function initFadeUps(){
     entries.forEach(e => { if(e.isIntersecting) e.target.classList.add('show'); });
   }, { threshold: 0.15 });
   els.forEach(el => obs.observe(el));
+}
+
+const contactForm = document.getElementById('contact-form');
+const formSuccess = document.getElementById('form-success');
+const newMessageBtn = document.getElementById('new-message-btn');
+
+if (contactForm) {
+  contactForm.addEventListener('submit', async event => {
+    event.preventDefault();
+    const submitButton = contactForm.querySelector('button[type="submit"]');
+    if (!submitButton) return;
+
+    submitButton.disabled = true;
+    submitButton.textContent = 'Sending...';
+
+    try {
+      const formData = new FormData(contactForm);
+      const response = await fetch(contactForm.action, {
+        method: contactForm.method,
+        body: formData,
+        mode: 'cors',
+      });
+      const data = await response.json();
+
+      if (response.ok && data.success !== false) {
+        contactForm.style.display = 'none';
+        formSuccess.style.display = 'block';
+        formSuccess.classList.add('fade-up', 'show');
+        contactForm.reset();
+      } else {
+        throw new Error(data.message || 'Submission failed');
+      }
+    } catch (error) {
+      alert('Submission failed. Please try again or email codecraftmedia3@gmail.com');
+      console.error(error);
+    } finally {
+      submitButton.disabled = false;
+      submitButton.textContent = 'Send Inquiry ✦';
+    }
+  });
+}
+
+if (newMessageBtn) {
+  newMessageBtn.addEventListener('click', () => {
+    contactForm.style.display = '';
+    formSuccess.style.display = 'none';
+  });
 }
 
 // URL HASH NAV
