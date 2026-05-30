@@ -824,7 +824,8 @@ body::after{
       </div>
       <div class="contact-form-wrap">
         <h2>Send a Message</h2>
-        <form onsubmit="return false">
+        <form onsubmit="return false" action="https://api.web3forms.com/submit" method="POST">
+          <input type="hidden" name="access_key" value="0f279afb-ee25-4613-9aae-65e3a5f3c415">
           <div class="form-row">
             <div class="field"><label>Full Name</label><input type="text" placeholder="Your full name"></div>
             <div class="field"><label>Email Address</label><input type="email" placeholder="your@email.com"></div>
