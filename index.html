@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="CodeCraft Media is a creative digital agency in Ethiopia specializing in web development, 3D animation, content creation, and social media growth.">
 <title>CodeCraft Media — Digital Agency</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;800;900&family=Space+Mono:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
@@ -608,6 +609,8 @@ html.light .hero-title .line1{
   .hero-stats{flex-wrap:wrap;gap:1.5rem}
   .contact-wrap{padding:5rem 5%}
   .contact-form-wrap{padding:1.75rem}
+}
+
 /* LIGHT MODE — structural adjustments only, text stays light via CSS vars */
 
 /* Cube faces: more opaque so they read on light bg */
@@ -704,6 +707,8 @@ html.light .field input,html.light .field select,html.light .field textarea{
 </head>
 <body>
 
+<a class="skip-link" href="#home" style="position:absolute;left:-9999px;top:auto">Skip to main content</a>
+
 <div id="cursor"></div>
 <div id="cursor-ring"></div>
 <div class="blob blob1"></div>
@@ -744,26 +749,26 @@ html.light .field input,html.light .field select,html.light .field textarea{
 </div>
 
 <!-- NAVBAR -->
-<nav class="nav" id="navbar">
-  <a href="#home" class="nav-brand" onclick="rootNav('home');return false">CodeCraft</a>
-  <ul class="nav-links">
+<nav class="nav" id="navbar" aria-label="Primary navigation">
+  <a href="#home" class="nav-brand" aria-label="CodeCraft home" onclick="rootNav('home');return false">CodeCraft</a>
+  <ul class="nav-links" aria-label="Main navigation links">
     <li><a href="#home" onclick="rootNav('home');return false">Home</a></li>
     <li><a href="#about" onclick="rootNav('home');scrollTo('about');return false">About</a></li>
     <li><a href="#services" onclick="rootNav('home');scrollTo('services');return false">Services</a></li>
     <li><a href="#projects" onclick="rootNav('project');return false">Work</a></li>
     <li><a href="#contact" onclick="rootNav('contact');return false">Contact</a></li>
   </ul>
-  <a class="nav-cta" href="#" onclick="rootNav('contact');return false">Start a Project →</a>
-  <button class="theme-toggle" id="themeToggleDesktop" aria-label="Toggle theme" onclick="toggleTheme()" style="background:none;border:none;padding:0;margin-left:.5rem">
+  <a class="nav-cta" href="#" aria-label="Start a project" onclick="rootNav('contact');return false">Start a Project →</a>
+  <button class="theme-toggle" id="themeToggleDesktop" type="button" aria-label="Toggle color theme" aria-pressed="false" onclick="toggleTheme()" style="background:none;border:none;padding:0;margin-left:.5rem">
     <div class="theme-toggle-track">
       <div class="theme-toggle-thumb" id="toggleThumb">🌙</div>
     </div>
   </button>
-  <button class="ham" id="ham" aria-label="Menu" onclick="toggleMenu()">
+  <button class="ham" id="ham" type="button" aria-label="Open navigation menu" aria-expanded="false" aria-controls="mobmenu" onclick="toggleMenu()">
     <span></span><span></span><span></span>
   </button>
 </nav>
-<div class="mob-menu" id="mobmenu">
+<div class="mob-menu" id="mobmenu" aria-label="Mobile navigation menu" aria-hidden="true">
   <a href="#" onclick="rootNav('home');closeMenu();return false">Home</a>
   <a href="#" onclick="rootNav('home');closeMenu();setTimeout(()=>document.getElementById('about')?.scrollIntoView({behavior:'smooth'}),50);return false">About</a>
   <a href="#" onclick="rootNav('home');closeMenu();setTimeout(()=>document.getElementById('services')?.scrollIntoView({behavior:'smooth'}),50);return false">Services</a>
@@ -771,7 +776,7 @@ html.light .field input,html.light .field select,html.light .field textarea{
   <a href="#" onclick="rootNav('contact');closeMenu();return false">Contact</a>
   <div class="mob-toggle-row">
     <span id="themeLabel">Dark mode</span>
-    <button class="theme-toggle" aria-label="Toggle theme" onclick="toggleTheme()" style="background:none;border:none;padding:0">
+    <button class="theme-toggle" type="button" aria-label="Toggle color theme" aria-pressed="false" onclick="toggleTheme()" style="background:none;border:none;padding:0">
       <div class="theme-toggle-track">
         <div class="theme-toggle-thumb" id="toggleThumbMob">🌙</div>
       </div>
@@ -783,11 +788,11 @@ html.light .field input,html.light .field select,html.light .field textarea{
 <div id="home-root" class="body">
 
   <!-- HERO -->
-  <section class="hero" id="home">
+  <section class="hero" id="home" aria-labelledby="home-title">
     <div class="hero-grid">
       <div>
         <div class="hero-eyebrow">Creative digital agency · Ethiopia</div>
-        <h1 class="hero-title">
+        <h1 class="hero-title" id="home-title">
           <span class="line1">Build.</span>
           <span class="line2">CodeCraft.</span>
         </h1>
@@ -816,11 +821,11 @@ html.light .field input,html.light .field select,html.light .field textarea{
   </section>
 
   <!-- ABOUT -->
-  <section class="about fade-up" id="about">
+  <section class="about fade-up" id="about" aria-labelledby="about-title">
     <div class="about-grid">
       <div class="about-text">
         <div class="section-tag">Who we are</div>
-        <h2 class="section-title">About <span>CodeCraft</span></h2>
+        <h2 class="section-title" id="about-title">About <span>CodeCraft</span></h2>
         <p>We're a tight-knit team of three creators from Ethiopia building digital products that feel <strong>simple, fast, and intentional</strong> — for modern businesses entering the digital space.</p>
         <p>To turn ideas into clear, functional experiences that help brands grow online, blending strategy, creativity, and technology into every project. Beautiful, user-friendly, and built to make a measurable impact.</p>
         <a class="btn btn-ghost btn-sm" href="#" onclick="rootNav('contact');return false" style="margin-top:.5rem">Work with us →</a>
@@ -845,9 +850,9 @@ html.light .field input,html.light .field select,html.light .field textarea{
   <hr class="divider">
 
   <!-- SERVICES -->
-  <section class="services fade-up" id="services">
+  <section class="services fade-up" id="services" aria-labelledby="services-title">
     <div class="section-tag">What we do</div>
-    <h2 class="section-title">Our <span>Services</span></h2>
+    <h2 class="section-title" id="services-title">Our <span>Services</span></h2>
     <div class="svc-grid">
       <div class="svc-card" onclick="rootNav('project')">
         <span class="svc-tag tag-live">✦ Available</span>
@@ -883,9 +888,9 @@ html.light .field input,html.light .field select,html.light .field textarea{
   <hr class="divider">
 
   <!-- EXPLORE MORE -->
-  <section class="explore fade-up" id="explore">
+  <section class="explore fade-up" id="explore" aria-labelledby="explore-title">
     <div class="section-tag">Explore</div>
-    <h2 class="section-title">See Our <span>Work</span></h2>
+    <h2 class="section-title" id="explore-title">See Our <span>Work</span></h2>
     <div class="explore-grid">
       <div class="explore-card ec1" onclick="rootNav('project')">
         <div class="ec-arrow">→</div>
@@ -901,7 +906,7 @@ html.light .field input,html.light .field select,html.light .field textarea{
   </section>
 
   <!-- FOOTER -->
-  <footer class="footer">
+  <footer class="footer" aria-label="Footer">
     <div class="footer-inner">
       <div class="footer-brand">
         <div class="logo">CodeCraft</div>
@@ -1075,12 +1080,18 @@ window.addEventListener('scroll', () => {
 function toggleMenu(){
   const h = document.getElementById('ham');
   const m = document.getElementById('mobmenu');
-  h.classList.toggle('open');
-  m.classList.toggle('open');
+  const isOpen = h.classList.toggle('open');
+  m.classList.toggle('open', isOpen);
+  h.setAttribute('aria-expanded', String(isOpen));
+  m.setAttribute('aria-hidden', String(!isOpen));
 }
 function closeMenu(){
-  document.getElementById('ham').classList.remove('open');
-  document.getElementById('mobmenu').classList.remove('open');
+  const h = document.getElementById('ham');
+  const m = document.getElementById('mobmenu');
+  h.classList.remove('open');
+  m.classList.remove('open');
+  h.setAttribute('aria-expanded', 'false');
+  m.setAttribute('aria-hidden', 'true');
 }
 
 // SPA NAVIGATION
@@ -1169,8 +1180,10 @@ function toggleTheme(){
 }
 function updateToggleUI(isLight){
   const thumbs = document.querySelectorAll('.theme-toggle-thumb');
+  const buttons = document.querySelectorAll('.theme-toggle');
   const label = document.getElementById('themeLabel');
   thumbs.forEach(t => t.textContent = isLight ? '☀️' : '🌙');
+  buttons.forEach(btn => btn.setAttribute('aria-pressed', String(isLight)));
   if(label) label.textContent = isLight ? 'Light mode' : 'Dark mode';
 }
 // Load saved theme
